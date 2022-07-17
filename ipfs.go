@@ -258,6 +258,7 @@ type AddParams struct {
 	Shard     bool
 	NoCopy    bool
 	HashFun   string
+	Prefix    *cid.Prefix
 }
 
 // AddFile chunks and adds content to the DAGService from a reader. The content
@@ -270,10 +271,15 @@ func (p *Peer) AddFile(ctx context.Context, r io.Reader, params *AddParams) (ipl
 	if params.HashFun == "" {
 		params.HashFun = "sha2-256"
 	}
-
-	prefix, err := merkledag.PrefixForCidVersion(1)
-	if err != nil {
-		return nil, fmt.Errorf("bad CID Version: %s", err)
+	var prefix cid.Prefix
+	if params.Prefix != nil {
+		prefix = *params.Prefix
+	} else {
+		var err error
+		prefix, err = merkledag.PrefixForCidVersion(1)
+		if err != nil {
+			return nil, fmt.Errorf("bad CID Version: %s", err)
+		}
 	}
 
 	hashFunCode, ok := multihash.Names[strings.ToLower(params.HashFun)]
