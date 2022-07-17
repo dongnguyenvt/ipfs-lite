@@ -1,4 +1,4 @@
-module github.com/dongnguyen/ipfs-lite
+module github.com/dongnguyenvt/ipfs-lite
 
 go 1.18
 

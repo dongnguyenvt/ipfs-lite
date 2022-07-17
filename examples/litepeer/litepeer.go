@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	ipfslite "github.com/dongnguyen/ipfs-lite"
+	ipfslite "github.com/dongnguyenvt/ipfs-lite"
 	"github.com/ipfs/go-cid"
 	crypto "github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/multiformats/go-multiaddr"
